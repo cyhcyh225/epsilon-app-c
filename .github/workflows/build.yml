@@ -25,15 +25,11 @@ jobs:
       - name: Run make check
         run: make check
 
-      # 上传生成的编译产物，例如 output/ 目录下的文件
-      - name: Upload build artifacts
+      # 仅上传 .nwa 文件
+      - name: Upload .nwa artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output
+          name: nwa-files
           path: |
-            output/**
-            build/**
-            *.elf
-            *.bin
-            *.hex
+            **/*.nwa
           if-no-files-found: ignore
