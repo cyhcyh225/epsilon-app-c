@@ -12,6 +12,7 @@ void move_pointer() {
     if (eadk_keyboard_key_down(keyboard, eadk_key_back)) {
       return;
     }
+  }
 }
 
 int main(int argc, char * argv[]) {
