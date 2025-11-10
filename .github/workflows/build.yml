@@ -1,15 +1,39 @@
 name: Build
-on: [pull_request, push]
+
+on:
+  workflow_dispatch:     # ← 只允许手动按钮触发
+    inputs:
+      build_target:
+        description: 'Make target (e.g., build, check, all)'
+        required: false
+        default: 'build'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Install toolchain
         uses: numworks/setup-arm-toolchain@latest
+
       - name: Run make build
-        run: make build
+        run: make ${{ github.event.inputs.build_target }}
+
       - name: Run make check
         run: make check
+
+      # 上传生成的编译产物，例如 output/ 目录下的文件
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            output/**
+            build/**
+            *.elf
+            *.bin
+            *.hex
+          if-no-files-found: ignore
