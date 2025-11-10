@@ -17,7 +17,7 @@ void move_pointer() {
     }
   }
 }
-/*
+
 
 static inline void send_command(uint8_t c) {
     LCD_REG = c;
@@ -34,7 +34,7 @@ void read_id(uint8_t id[3]) {
     id[2] = receive_data();
 }
 
-
+/*
 int main(int argc, char * argv[]) {
   uint8_t id[3];
   char msg[30];
@@ -50,8 +50,11 @@ int main(int argc, char * argv[]) {
 }
 */
 int main(int argc, char * argv[]) {
+  uint8_t id[3];
   char msg[30];
   sprintf(msg, "id=0x%02X%02X%02X\r\n", 2, 3, 4);
   eadk_display_draw_string(msg, (eadk_point_t){0, 0}, true, eadk_color_black, eadk_color_white);
+  eadk_timing_msleep(2000);
+  eadk_display_draw_string(msg, (eadk_point_t){20, 0}, true, eadk_color_black, eadk_color_white);
   move_pointer();
 }
