@@ -36,6 +36,11 @@ void read_id(uint8_t id[3]) {
 int main(int argc, char * argv[]) {
   uint8_t id[3];
   char msg[30];
+  int i=0,j=0;
+  eadk_display_draw_string("hello", (eadk_point_t){0, 0}, true, eadk_color_black, eadk_color_white);
+  for (i=0;i<1e6;i++){
+    for (j=0;j<1e5;j++);
+  }
   read_id(id);
   sprintf(msg, "id=0x%02X%02X%02X\r\n", id[0], id[1], id[2]);
   eadk_display_draw_string(msg, (eadk_point_t){0, 0}, true, eadk_color_black, eadk_color_white);
