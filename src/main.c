@@ -55,6 +55,8 @@ int main(int argc, char * argv[]) {
   sprintf(msg, "id=0x%02X%02X%02X\r\n", 2, 3, 4);
   eadk_display_draw_string(msg, (eadk_point_t){0, 0}, true, eadk_color_black, eadk_color_white);
   eadk_timing_msleep(2000);
-  eadk_display_draw_string(msg, (eadk_point_t){20, 0}, true, eadk_color_black, eadk_color_white);
+  read_id(id);
+  sprintf(msg, "id=0x%02X%02X%02X\r\n", id[0], id[1], id[2]);
+  eadk_display_draw_string(msg, (eadk_point_t){20, 20}, true, eadk_color_black, eadk_color_white);
   move_pointer();
 }
